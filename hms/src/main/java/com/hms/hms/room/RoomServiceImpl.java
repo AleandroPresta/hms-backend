@@ -46,5 +46,10 @@ public class RoomServiceImpl implements RoomService{
         roomRepository.delete(room);
         return RoomMapper.mapToRoomDto(room);
     }
+
+    @Override
+    public Iterable<RoomDto> findRoomsByType(String type) {
+        return roomRepository.findRoomsByType(type);
+    }
     
 }
