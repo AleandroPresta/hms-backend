@@ -1,50 +1,50 @@
 package com.hms.hms.room;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class RoomServiceImpl implements RoomService {
+public class RoomServiceImpl implements RoomService{
 
-    private final RoomRepository roomRepository;
+    private RoomRepository roomRepository;
 
     @Override
     public RoomDto createRoom(RoomDto roomDto) {
-        Room room = RoomMapper.toEntity(roomDto);
-        room = roomRepository.save(room);
-        return RoomMapper.toDto(room);
+        Room room = RoomMapper.mapToRoom(roomDto);
+        Room savedRoom = roomRepository.save(room);
+        return RoomMapper.mapToRoomDto(savedRoom);
     }
 
     @Override
-    public RoomDto getRoom(Long id) {
+    public Iterable<RoomDto> getAllRooms() {
+        return RoomMapper.mapToRoomDtos(roomRepository.findAll());
+    }
+
+    @Override
+    public RoomDto getRoomById(Long id) {
         Room room = roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Room not found"));
-        return RoomMapper.toDto(room);
-    }
-
-    @Override
-    public List<RoomDto> getRooms() {
-        List<Room> rooms = roomRepository.findAll();
-        return rooms.stream().map(RoomMapper::toDto).collect(Collectors.toList());
+        return RoomMapper.mapToRoomDto(room);
     }
 
     @Override
     public RoomDto updateRoom(Long id, RoomDto roomDto) {
         Room room = roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Room not found"));
-        room.setType(roomDto.getRoomType());
+        room.setType(roomDto.getType());
         room.setPrice(roomDto.getPrice());
         room.setRating(roomDto.getRating());
-        room = roomRepository.save(room);
-        return RoomMapper.toDto(room);
+        room.setAvailable(roomDto.isAvailable());
+
+        Room updatedRoom = roomRepository.save(room);
+        return RoomMapper.mapToRoomDto(updatedRoom);
     }
 
     @Override
-    public void deleteRoom(Long id) {
-        roomRepository.deleteById(id);
+    public RoomDto deleteRoomById(Long id) {
+        Room room = roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Room not found"));
+        roomRepository.delete(room);
+        return RoomMapper.mapToRoomDto(room);
     }
     
 }

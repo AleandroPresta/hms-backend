@@ -7,13 +7,18 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class RoomDto {
 
     private Long id;
-    private String roomType;
+
+    private String type;
+    
     private Double price;
+
     private Double rating;
+
+    private boolean isAvailable;
     
 }
