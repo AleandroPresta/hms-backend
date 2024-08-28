@@ -9,7 +9,7 @@ public class RoomMapper {
         return new RoomDto(
             room.getId(),
             room.getType(),
-            room.getRating(),
+            room.getPrice(),
             room.getRating(),
             room.isAvailable()
         );
@@ -19,7 +19,7 @@ public class RoomMapper {
         return new Room(
             roomDto.getId(),
             roomDto.getType(),
-            roomDto.getRating(),
+            roomDto.getPrice(),
             roomDto.getRating(),
             roomDto.isAvailable()
         );

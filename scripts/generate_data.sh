@@ -39,7 +39,8 @@ do
 {
   "type": "$ROOM_TYPE",
   "price": $PRICE,
-  "rating": $RATING
+  "rating": $RATING,
+  "available": true
 }
 EOF
 )
