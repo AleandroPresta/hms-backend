@@ -52,7 +52,7 @@ public class RoomController {
         return new ResponseEntity<RoomDto>(deletedRoom, HttpStatus.OK);
     }
 
-    @GetMapping("type/{type}")
+    @GetMapping("type={type}")
     public ResponseEntity<Iterable<RoomDto>> findRoomsByType(@PathVariable String type) {
         Iterable<RoomDto> rooms = roomService.findRoomsByType(type);
         return new ResponseEntity<>(rooms, HttpStatus.OK);
