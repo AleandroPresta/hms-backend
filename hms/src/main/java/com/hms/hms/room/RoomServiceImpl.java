@@ -21,7 +21,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomDto getRoom(long id) {
+    public RoomDto getRoom(Long id) {
         Room room = roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Room not found"));
         return RoomMapper.toDto(room);
     }
@@ -33,9 +33,9 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomDto updateRoom(long id, RoomDto roomDto) {
+    public RoomDto updateRoom(Long id, RoomDto roomDto) {
         Room room = roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Room not found"));
-        room.setRoomType(roomDto.getRoomType());
+        room.setType(roomDto.getRoomType());
         room.setPrice(roomDto.getPrice());
         room.setRating(roomDto.getRating());
         room = roomRepository.save(room);
@@ -43,7 +43,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public void deleteRoom(long id) {
+    public void deleteRoom(Long id) {
         roomRepository.deleteById(id);
     }
     

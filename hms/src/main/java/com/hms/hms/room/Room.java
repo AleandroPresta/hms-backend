@@ -19,11 +19,11 @@ import lombok.Setter;
 public class Room {
 
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "room_type")
-    private String roomType;
+    @Column(name = "type")
+    private String type;
 
     @Column(name = "price")
     private Double price;

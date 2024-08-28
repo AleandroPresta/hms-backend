@@ -2,6 +2,8 @@ package com.hms.hms.room;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,13 +21,15 @@ public class RoomController {
         private final RoomService roomService;
     
         @PostMapping
-        public RoomDto createRoom(RoomDto roomDto) {
-            return roomService.createRoom(roomDto);
+        public ResponseEntity<RoomDto> createRoom(RoomDto roomDto) {
+            RoomDto savedRoom = roomService.createRoom(roomDto);
+            return new ResponseEntity<>(savedRoom, HttpStatus.CREATED);
         }
     
         @GetMapping("{id}")
-        public RoomDto getRoom(long id) {
-            return roomService.getRoom(id);
+        public ResponseEntity<RoomDto> getRoom(Long id) {
+            RoomDto room = roomService.getRoom(id);
+            return new ResponseEntity<>(room, HttpStatus.OK);
         }
     
         @GetMapping("all")
@@ -34,12 +38,12 @@ public class RoomController {
         }
     
         @PutMapping("{id}")
-        public RoomDto updateRoom(long id, RoomDto roomDto) {
+        public RoomDto updateRoom(Long id, RoomDto roomDto) {
             return roomService.updateRoom(id, roomDto);
         }
     
         @DeleteMapping("{id}")
-        public void deleteRoom(long id) {
+        public void deleteRoom(Long id) {
             roomService.deleteRoom(id);
         }
 }

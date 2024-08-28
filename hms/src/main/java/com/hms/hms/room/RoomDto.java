@@ -11,9 +11,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RoomDto {
 
-    private long id;
+    private Long id;
     private String roomType;
-    private double price;
-    private double rating;
+    private Double price;
+    private Double rating;
     
 }
