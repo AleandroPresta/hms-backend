@@ -14,7 +14,9 @@ ROOM_TYPES=("single" "double" "suite" "queen" "king")
 
 # Function to generate random floating point number between two values
 random_float() {
-  awk -v min=$1 -v max=$2 'BEGIN{srand(); print min+rand()*(max-min)}'
+  min=$1
+  max=$2
+  echo "$(awk -v min=$min -v max=$max -v seed=$RANDOM 'BEGIN{srand(seed); printf "%.1f\n", min + rand() * (max - min)}')"
 }
 
 # Function to generate random integer within a range
@@ -29,12 +31,11 @@ do
   ROOM_TYPE=${ROOM_TYPES[$(random_int 0 $((${#ROOM_TYPES[@]} - 1)))]}
 
   # Generate random price between 50 and 500
-  PRICE=$(random_float 50 500)
+  PRICE=$(random_float 25 125)
 
-  # Generate random rating between 1.0 and 5.0
+  # Generate random rating between 1 and 5
   RATING=$(random_float 1 5)
 
-  # Prepare the data payload
   DATA=$(cat <<EOF
 {
   "type": "$ROOM_TYPE",

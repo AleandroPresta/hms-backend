@@ -1,6 +1,7 @@
 package com.hms.hms.room;
 
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 
@@ -45,6 +46,36 @@ public class RoomServiceImpl implements RoomService{
         Room room = roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Room not found"));
         roomRepository.delete(room);
         return RoomMapper.mapToRoomDto(room);
+    }
+
+    @Override
+    public Iterable<RoomDto> findRoomsByType(List<String> type) {
+        return roomRepository.findRoomsByType(type);
+    }
+
+    @Override
+    public Iterable<RoomDto> findAvailableRooms() {
+        return roomRepository.findAvailableRooms();
+    }
+
+    @Override
+    public Iterable<RoomDto> findRoomsByPriceLessThen(Double price) {
+        return roomRepository.findRoomsByPriceLessThen(price);
+    }
+
+    @Override
+    public Iterable<RoomDto> findRoomsByPriceGreaterThan(Double price) {
+        return roomRepository.findRoomsByPriceGreaterThan(price);
+    }
+
+    @Override
+    public Iterable<RoomDto> findRoomsByRatingLessThen(Double rating) {
+        return roomRepository.findRoomsByRatingLessThen(rating);
+    }
+
+    @Override
+    public Iterable<RoomDto> findRoomsByRatingGreaterThan(Double rating) {
+        return roomRepository.findRoomsByRatingGreaterThan(rating);
     }
     
 }
