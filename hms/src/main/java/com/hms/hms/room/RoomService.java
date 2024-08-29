@@ -16,6 +16,6 @@ public interface RoomService {
     // Iterable<RoomDto> findRoomsByPriceGreaterThan(Double price);
     // Iterable<RoomDto> findRoomsByRatingLessThen(Double rating);
     // Iterable<RoomDto> findRoomsByRatingGreaterThan(Double rating);
-    // Iterable<RoomDto> findAvailableRooms();
+    Iterable<RoomDto> findAvailableRooms();
     
 }

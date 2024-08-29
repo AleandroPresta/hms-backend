@@ -59,4 +59,10 @@ public class RoomController {
         Iterable<RoomDto> rooms = roomService.findRoomsByType(types);
         return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
+
+    @GetMapping("/filter/available")
+    public ResponseEntity<Iterable<RoomDto>> findAvailableRooms() {
+        Iterable<RoomDto> rooms = roomService.findAvailableRooms();
+        return new ResponseEntity<>(rooms, HttpStatus.OK);
+    }
 }
