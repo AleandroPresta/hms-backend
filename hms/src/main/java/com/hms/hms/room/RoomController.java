@@ -1,5 +1,6 @@
 package com.hms.hms.room;
 
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
@@ -52,9 +54,9 @@ public class RoomController {
         return new ResponseEntity<RoomDto>(deletedRoom, HttpStatus.OK);
     }
 
-    @GetMapping("type={type}")
-    public ResponseEntity<Iterable<RoomDto>> findRoomsByType(@PathVariable String type) {
-        Iterable<RoomDto> rooms = roomService.findRoomsByType(type);
+    @GetMapping("/filter")
+    public ResponseEntity<Iterable<RoomDto>> findRoomsByType(@RequestParam(value = "types") List<String> types) {
+        Iterable<RoomDto> rooms = roomService.findRoomsByType(types);
         return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 }

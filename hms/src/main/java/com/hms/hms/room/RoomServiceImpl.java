@@ -1,6 +1,7 @@
 package com.hms.hms.room;
 
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 
@@ -48,7 +49,7 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public Iterable<RoomDto> findRoomsByType(String type) {
+    public Iterable<RoomDto> findRoomsByType(List<String> type) {
         return roomRepository.findRoomsByType(type);
     }
     

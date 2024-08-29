@@ -1,5 +1,7 @@
 package com.hms.hms.room;
 
+import java.util.List;
+
 public interface RoomService {
 
     RoomDto createRoom(RoomDto roomDto);
@@ -9,7 +11,7 @@ public interface RoomService {
     RoomDto deleteRoomById(Long id);
 
     // Find
-    Iterable<RoomDto> findRoomsByType(String type);
+    Iterable<RoomDto> findRoomsByType(List<String> type);
     // Iterable<RoomDto> findRoomsByPriceLessThen(Double price);
     // Iterable<RoomDto> findRoomsByPriceGreaterThan(Double price);
     // Iterable<RoomDto> findRoomsByRatingLessThen(Double rating);
