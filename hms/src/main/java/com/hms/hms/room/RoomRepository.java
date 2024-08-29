@@ -17,18 +17,18 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     Iterable<RoomDto> findAvailableRooms();
 
     @Query("SELECT new com.hms.hms.room.RoomDto(r.id, r.type, r.price, r.rating, r.isAvailable) " +
-       "FROM Room r WHERE r.price < :price")
+       "FROM Room r WHERE r.price <= :price")
     Iterable<RoomDto> findRoomsByPriceLessThen(@Param("price") Double price);
 
     @Query("SELECT new com.hms.hms.room.RoomDto(r.id, r.type, r.price, r.rating, r.isAvailable) " +
-       "FROM Room r WHERE r.price > :price")
+       "FROM Room r WHERE r.price >= :price")
     Iterable<RoomDto> findRoomsByPriceGreaterThan(@Param("price") Double price);
 
     @Query("SELECT new com.hms.hms.room.RoomDto(r.id, r.type, r.price, r.rating, r.isAvailable) " +
-       "FROM Room r WHERE r.rating > :rating")
+       "FROM Room r WHERE r.rating >= :rating")
     Iterable<RoomDto> findRoomsByRatingGreaterThan(@Param("rating") Double rating);
 
     @Query("SELECT new com.hms.hms.room.RoomDto(r.id, r.type, r.price, r.rating, r.isAvailable) " +
-       "FROM Room r WHERE r.rating < :rating")
+       "FROM Room r WHERE r.rating <= :rating")
     Iterable<RoomDto> findRoomsByRatingLessThen(@Param("rating") Double rating);
 }
