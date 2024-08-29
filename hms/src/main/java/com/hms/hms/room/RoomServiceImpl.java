@@ -57,5 +57,25 @@ public class RoomServiceImpl implements RoomService{
     public Iterable<RoomDto> findAvailableRooms() {
         return roomRepository.findAvailableRooms();
     }
+
+    @Override
+    public Iterable<RoomDto> findRoomsByPriceLessThen(Double price) {
+        return roomRepository.findRoomsByPriceLessThen(price);
+    }
+
+    @Override
+    public Iterable<RoomDto> findRoomsByPriceGreaterThan(Double price) {
+        return roomRepository.findRoomsByPriceGreaterThan(price);
+    }
+
+    @Override
+    public Iterable<RoomDto> findRoomsByRatingLessThen(Double rating) {
+        return roomRepository.findRoomsByRatingLessThen(rating);
+    }
+
+    @Override
+    public Iterable<RoomDto> findRoomsByRatingGreaterThan(Double rating) {
+        return roomRepository.findRoomsByRatingGreaterThan(rating);
+    }
     
 }

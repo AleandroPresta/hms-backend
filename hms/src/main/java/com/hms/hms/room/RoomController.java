@@ -54,9 +54,33 @@ public class RoomController {
         return new ResponseEntity<RoomDto>(deletedRoom, HttpStatus.OK);
     }
 
-    @GetMapping("/filter")
+    @GetMapping("/filter/type")
     public ResponseEntity<Iterable<RoomDto>> findRoomsByType(@RequestParam(value = "types") List<String> types) {
         Iterable<RoomDto> rooms = roomService.findRoomsByType(types);
+        return new ResponseEntity<>(rooms, HttpStatus.OK);
+    }
+
+    @GetMapping("/filter/priceLt")
+    public ResponseEntity<Iterable<RoomDto>> findRoomsByPriceLessThen(@RequestParam(value = "price") Double price) {
+        Iterable<RoomDto> rooms = roomService.findRoomsByPriceLessThen(price);
+        return new ResponseEntity<>(rooms, HttpStatus.OK);
+    }
+
+    @GetMapping("/filter/priceGt")
+    public ResponseEntity<Iterable<RoomDto>> findRoomsByPriceGreaterThan(@RequestParam(value = "price") Double price) {
+        Iterable<RoomDto> rooms = roomService.findRoomsByPriceGreaterThan(price);
+        return new ResponseEntity<>(rooms, HttpStatus.OK);
+    }
+
+    @GetMapping("/filter/ratingGt")
+    public ResponseEntity<Iterable<RoomDto>> findRoomsByRatingGreaterThan(@RequestParam(value = "rating") Double rating) {
+        Iterable<RoomDto> rooms = roomService.findRoomsByRatingGreaterThan(rating);
+        return new ResponseEntity<>(rooms, HttpStatus.OK);
+    }
+
+    @GetMapping("/filter/ratingLt")
+    public ResponseEntity<Iterable<RoomDto>> findRoomsByRatingLessThen(@RequestParam(value = "rating") Double rating) {
+        Iterable<RoomDto> rooms = roomService.findRoomsByRatingLessThen(rating);
         return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 
