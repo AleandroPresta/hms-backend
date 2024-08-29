@@ -3,7 +3,6 @@ package com.hms.hms.room;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -65,8 +67,8 @@ public class RoomController {
 
     @GetMapping("/filter/price")
     public ResponseEntity<Iterable<RoomDto>> findRoomsByPriceLessThen(
-        @RequestParam(value = "price") Double price,
-        @RequestParam(value = "operator") String operator) {
+        @RequestParam(value = "price") @Min(value = 0) Double price,
+        @RequestParam(value = "operator") @Pattern(regexp = "^(gt|lt)$") String operator) {
             if (operator.equals("gt")) { // >
                 return new ResponseEntity<>(roomService.findRoomsByPriceGreaterThan(price), HttpStatus.OK);
             }
@@ -76,8 +78,8 @@ public class RoomController {
 
     @GetMapping("/filter/rating")
     public ResponseEntity<Iterable<RoomDto>> findRoomsByRatingGreaterThan(
-        @RequestParam(value = "rating") Double rating,
-        @RequestParam(value = "operator") String operator) {
+        @RequestParam(value = "rating") @Min(value = 0) @Max(value = 5) Double rating,
+        @RequestParam(value = "operator") @Pattern(regexp = "^(gt|lt)$") String operator) {
             if (operator.equals("gt")) { // >
                 return new ResponseEntity<>(roomService.findRoomsByRatingGreaterThan(rating), HttpStatus.OK);
             }
