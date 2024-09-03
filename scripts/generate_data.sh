@@ -10,7 +10,7 @@ fi
 REQUEST_COUNT=$1
 
 # Array of possible room types
-ROOM_TYPES=("single" "double" "suite" "queen" "king")
+ROOM_TYPES=("SINGLE" "DOUBLE" "SUITE" "QUEEN" "KING")
 
 # Function to generate random floating point number between two values
 random_float() {

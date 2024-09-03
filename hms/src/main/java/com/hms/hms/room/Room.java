@@ -8,7 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+// import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,9 +33,12 @@ public class Room {
     @Column(name = "type")
     private RoomType type;
     
+    @Min(1)
     @Column(name = "price")
     private Double price;
 
+    @Min(1)
+    @Max(5)
     @Column(name = "rating")
     private Double rating;
 

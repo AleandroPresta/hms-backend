@@ -1,4 +1,4 @@
-#!/bin/bashù
+#!/bin/bash
 
 # Usage
 # ./test.sh <id>
@@ -34,7 +34,7 @@ check_status "Add room"
 check_status "Get room"
 
 # Execute the update_room script
-NEWTYPE=2
+NEWTYPE=DOUBLE
 ./update_room.sh $ID $NEWTYPE $PRICE $RATING $AVAILABLE 2>/dev/null
 check_status "Update room"
 
