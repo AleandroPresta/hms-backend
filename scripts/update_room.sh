@@ -32,4 +32,4 @@ echo "$DATA"
 curl --header "Content-Type: application/json" \
   --request PUT \
   --data "$DATA" \
-  http://localhost:8080/api/v1/room/$ID/update
+  http://localhost:8080/api/v1/rooms/$ID/update

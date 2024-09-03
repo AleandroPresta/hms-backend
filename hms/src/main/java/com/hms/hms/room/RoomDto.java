@@ -13,7 +13,7 @@ public class RoomDto {
 
     private Long id;
 
-    private String type;
+    private RoomType type;
     
     private Double price;
 

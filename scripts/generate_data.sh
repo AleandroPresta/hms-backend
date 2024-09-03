@@ -10,7 +10,7 @@ fi
 REQUEST_COUNT=$1
 
 # Array of possible room types
-ROOM_TYPES=("single" "double" "suite" "queen" "king")
+ROOM_TYPES=("SINGLE" "DOUBLE" "SUITE" "QUEEN" "KING")
 
 # Function to generate random floating point number between two values
 random_float() {
@@ -50,7 +50,7 @@ EOF
   curl --header "Content-Type: application/json" \
     --request POST \
     --data "$DATA" \
-    http://localhost:8080/api/v1/room
+    http://localhost:8080/api/v1/rooms
 
   # Optional: add a sleep interval to avoid overwhelming the server
   sleep 0.1

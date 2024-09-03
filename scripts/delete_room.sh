@@ -12,4 +12,4 @@ ID=$1
 # Make the HTTP call with the data
 curl --header "Content-Type: application/json" \
   --request DELETE \
-  http://localhost:8080/api/v1/room/$ID/delete
+  http://localhost:8080/api/v1/rooms/$ID/delete
