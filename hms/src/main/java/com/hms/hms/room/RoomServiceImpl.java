@@ -5,6 +5,8 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 
+import static com.hms.hms.room.CustomSpecs.typeIn;
+
 @Service
 @AllArgsConstructor
 public class RoomServiceImpl implements RoomService{
@@ -49,11 +51,11 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public Iterable<RoomDto> findRoomsByType(List<Integer> type) {
-        return roomRepository.findRoomsByType(type);
+    public Iterable<RoomDto> findRoomsByType(List<Integer> types) {
+        return roomRepository.findAll(typeIn(types));
     }
 
-    @Override
+    /* @Override
     public Iterable<RoomDto> findAvailableRooms() {
         return roomRepository.findAvailableRooms();
     }
@@ -76,6 +78,6 @@ public class RoomServiceImpl implements RoomService{
     @Override
     public Iterable<RoomDto> findRoomsByRatingGreaterThan(Double rating) {
         return roomRepository.findRoomsByRatingGreaterThan(rating);
-    }
+    } */
     
 }

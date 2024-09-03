@@ -12,10 +12,10 @@ public interface RoomService {
 
     // Filter services
     Iterable<RoomDto> findRoomsByType(List<Integer> type);
-    Iterable<RoomDto> findRoomsByPriceLessThen(Double price);
+    /*Iterable<RoomDto> findRoomsByPriceLessThen(Double price);
     Iterable<RoomDto> findRoomsByPriceGreaterThan(Double price);
     Iterable<RoomDto> findRoomsByRatingLessThen(Double rating);
     Iterable<RoomDto> findRoomsByRatingGreaterThan(Double rating);
-    Iterable<RoomDto> findAvailableRooms();
+    Iterable<RoomDto> findAvailableRooms(); */
     
 }

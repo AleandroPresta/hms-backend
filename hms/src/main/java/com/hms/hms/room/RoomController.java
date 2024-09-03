@@ -65,7 +65,7 @@ public class RoomController {
         return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 
-    @GetMapping("/filter/price")
+    /*@GetMapping("/filter/price")
     public ResponseEntity<Iterable<RoomDto>> findRoomsByPriceLessThen(
         @RequestParam(value = "price") @Min(value = 0) Double price,
         @RequestParam(value = "operator") @Pattern(regexp = "^(gt|lt)$") String operator) {
@@ -85,11 +85,11 @@ public class RoomController {
             }
             // <
             return new ResponseEntity<>(roomService.findRoomsByRatingLessThen(rating), HttpStatus.OK);
-    }
+    } 
 
     @GetMapping("/filter/available")
     public ResponseEntity<Iterable<RoomDto>> findAvailableRooms() {
         Iterable<RoomDto> rooms = roomService.findAvailableRooms();
         return new ResponseEntity<>(rooms, HttpStatus.OK);
-    }
+    } */
 }

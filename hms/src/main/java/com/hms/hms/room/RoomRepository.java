@@ -1,14 +1,15 @@
 package com.hms.hms.room;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface RoomRepository extends JpaRepository<Room, Long> {
+public interface RoomRepository extends JpaRepository<Room, Long> , JpaSpecificationExecutor<RoomDto> {
 
-   @Query("SELECT new com.hms.hms.room.RoomDto(r.id, r.type, r.price, r.rating, r.isAvailable) " +
+   /* @Query("SELECT new com.hms.hms.room.RoomDto(r.id, r.type, r.price, r.rating, r.isAvailable) " +
          "FROM Room r WHERE r.type IN :types")
    Iterable<RoomDto> findRoomsByType(@Param("types") List<Integer> types);
 
@@ -30,5 +31,5 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
    @Query("SELECT new com.hms.hms.room.RoomDto(r.id, r.type, r.price, r.rating, r.isAvailable) " +
       "FROM Room r WHERE r.rating <= :rating")
-   Iterable<RoomDto> findRoomsByRatingLessThen(@Param("rating") Double rating);
+   Iterable<RoomDto> findRoomsByRatingLessThen(@Param("rating") Double rating); */
 }
