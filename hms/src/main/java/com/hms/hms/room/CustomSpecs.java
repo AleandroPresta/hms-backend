@@ -10,4 +10,7 @@ public class CustomSpecs {
         return (root, query, cb) -> root.get("type").in(types);
     }
     
+    public static Specification<RoomDto> priceLessThan(Double price) {
+        return (root, query, cb) -> cb.lessThan(root.get("price"), price);
+    }
 }

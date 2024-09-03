@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 
 import static com.hms.hms.room.CustomSpecs.typeIn;
+import static com.hms.hms.room.CustomSpecs.priceLessThan;
 
 @Service
 @AllArgsConstructor
@@ -58,6 +59,11 @@ public class RoomServiceImpl implements RoomService{
     @Override
     public Iterable<RoomDto> findRoomsByTypeAndPrice(RoomType type, Double price) {
         return RoomMapper.mapToRoomDtos(roomRepository.findRoomsByTypeAndPrice(type, price)); 
+    }
+
+    @Override
+    public Iterable<RoomDto> findRoomsByTypeAndPriceLessThen(List<RoomType> type, Double price) {
+        return roomRepository.findAll(typeIn(type).and(priceLessThan(price)));
     }
 
     /* @Override

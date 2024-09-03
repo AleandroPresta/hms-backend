@@ -73,6 +73,15 @@ public class RoomController {
             return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 
+    @GetMapping("filter/type/price/lt")
+    public ResponseEntity<Iterable<RoomDto>> findRoomsByTypeAndPriceLessThen(
+        @RequestParam(value = "type") List<RoomType> type,
+        @RequestParam(value = "price") @Min(value = 0) Double price) {
+        Iterable<RoomDto> rooms = roomService.findRoomsByTypeAndPriceLessThen(type, price);
+            return new ResponseEntity<>(rooms, HttpStatus.OK);
+    }
+    
+
     /*@GetMapping("/filter/price")
     public ResponseEntity<Iterable<RoomDto>> findRoomsByPriceLessThen(
         @RequestParam(value = "price") @Min(value = 0) Double price,
