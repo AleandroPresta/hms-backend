@@ -59,7 +59,7 @@ public class RoomController {
 
     @GetMapping("/filter/type")
     public ResponseEntity<Iterable<RoomDto>> findRoomsByType(
-        @RequestParam(value = "types") List<String> types
+        @RequestParam(value = "types") List<Integer> types
         ) {
         Iterable<RoomDto> rooms = roomService.findRoomsByType(types);
         return new ResponseEntity<>(rooms, HttpStatus.OK);

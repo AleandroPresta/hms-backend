@@ -10,7 +10,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
    @Query("SELECT new com.hms.hms.room.RoomDto(r.id, r.type, r.price, r.rating, r.isAvailable) " +
          "FROM Room r WHERE r.type IN :types")
-   Iterable<RoomDto> findRoomsByType(@Param("types") List<String> types);
+   Iterable<RoomDto> findRoomsByType(@Param("types") List<Integer> types);
 
    @Query("SELECT new com.hms.hms.room.RoomDto(r.id, r.type, r.price, r.rating, r.isAvailable) " +
       "FROM Room r WHERE r.isAvailable = true")

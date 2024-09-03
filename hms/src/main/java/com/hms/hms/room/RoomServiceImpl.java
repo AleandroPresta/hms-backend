@@ -49,7 +49,7 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public Iterable<RoomDto> findRoomsByType(List<String> type) {
+    public Iterable<RoomDto> findRoomsByType(List<Integer> type) {
         return roomRepository.findRoomsByType(type);
     }
 
