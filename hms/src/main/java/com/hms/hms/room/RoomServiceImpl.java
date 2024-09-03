@@ -51,8 +51,13 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public Iterable<RoomDto> findRoomsByType(List<Integer> types) {
+    public Iterable<RoomDto> findRoomsByType(List<RoomType> types) {
         return roomRepository.findAll(typeIn(types));
+    }
+
+    @Override
+    public Iterable<RoomDto> findRoomsByTypeAndPrice(RoomType type, Double price) {
+        return RoomMapper.mapToRoomDtos(roomRepository.findRoomsByTypeAndPrice(type, price)); 
     }
 
     /* @Override
