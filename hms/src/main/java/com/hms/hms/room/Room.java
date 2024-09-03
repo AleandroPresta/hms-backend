@@ -27,9 +27,9 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Pattern(regexp = "^(single|double|suite|queen|king)$")
+    // @Pattern(regexp = "^(single|double|suite|queen|king)$")
     @Column(name = "type")
-    private String type;
+    private RoomType type;
     
     @Column(name = "price")
     private Double price;

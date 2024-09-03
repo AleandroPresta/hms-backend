@@ -21,7 +21,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/room")
+@RequestMapping("/api/v1/rooms")
 @CrossOrigin(origins = "http://localhost:4200") // Allow cross-origin requests from Angular
 public class RoomController {
     
