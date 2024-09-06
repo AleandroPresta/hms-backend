@@ -34,3 +34,5 @@ build/
 
 ## Additional files ##
 application.properties
+
+.metals/

@@ -9,13 +9,11 @@ public interface RoomService {
     RoomDto getRoomById(Long id);
     RoomDto updateRoom(Long id, RoomDto roomDto);
     RoomDto deleteRoomById(Long id);
+    Iterable<RoomDto> searchRooms(
+        List<RoomType> types,
+        Double price,
+        Double rating
+    );
 
-    // Filter services
-    Iterable<RoomDto> findRoomsByType(List<Integer> type);
-    Iterable<RoomDto> findRoomsByPriceLessThen(Double price);
-    Iterable<RoomDto> findRoomsByPriceGreaterThan(Double price);
-    Iterable<RoomDto> findRoomsByRatingLessThen(Double rating);
-    Iterable<RoomDto> findRoomsByRatingGreaterThan(Double rating);
-    Iterable<RoomDto> findAvailableRooms();
     
 }

@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -26,6 +23,7 @@ import lombok.AllArgsConstructor;
 public class RoomController {
     
     private RoomService roomService;
+    private SearchRoomRepository searchRoomRepository;
 
     @PostMapping
     public ResponseEntity<RoomDto> createRoom(@RequestBody RoomDto roomDto) {
@@ -57,39 +55,14 @@ public class RoomController {
         return new ResponseEntity<RoomDto>(deletedRoom, HttpStatus.OK);
     }
 
-    @GetMapping("/filter/type")
-    public ResponseEntity<Iterable<RoomDto>> findRoomsByType(
-        @RequestParam(value = "types") List<Integer> types
-        ) {
-        Iterable<RoomDto> rooms = roomService.findRoomsByType(types);
-        return new ResponseEntity<>(rooms, HttpStatus.OK);
+    @GetMapping("search")
+    public ResponseEntity<Iterable<RoomDto>> searchRooms(
+        @RequestParam(required = false) List<RoomType> types,
+        @RequestParam(required = false) Double price,
+        @RequestParam(required = false) Double rating
+    ) {
+        Iterable<RoomDto> searchedRooms = roomService.searchRooms(types, price, rating);
+        return new ResponseEntity<>(searchedRooms, HttpStatus.OK);
     }
-
-    @GetMapping("/filter/price")
-    public ResponseEntity<Iterable<RoomDto>> findRoomsByPriceLessThen(
-        @RequestParam(value = "price") @Min(value = 0) Double price,
-        @RequestParam(value = "operator") @Pattern(regexp = "^(gt|lt)$") String operator) {
-            if (operator.equals("gt")) { // >
-                return new ResponseEntity<>(roomService.findRoomsByPriceGreaterThan(price), HttpStatus.OK);
-            }
-            // <
-            return new ResponseEntity<>(roomService.findRoomsByPriceLessThen(price), HttpStatus.OK);
-    }
-
-    @GetMapping("/filter/rating")
-    public ResponseEntity<Iterable<RoomDto>> findRoomsByRatingGreaterThan(
-        @RequestParam(value = "rating") @Min(value = 0) @Max(value = 5) Double rating,
-        @RequestParam(value = "operator") @Pattern(regexp = "^(gt|lt)$") String operator) {
-            if (operator.equals("gt")) { // >
-                return new ResponseEntity<>(roomService.findRoomsByRatingGreaterThan(rating), HttpStatus.OK);
-            }
-            // <
-            return new ResponseEntity<>(roomService.findRoomsByRatingLessThen(rating), HttpStatus.OK);
-    }
-
-    @GetMapping("/filter/available")
-    public ResponseEntity<Iterable<RoomDto>> findAvailableRooms() {
-        Iterable<RoomDto> rooms = roomService.findAvailableRooms();
-        return new ResponseEntity<>(rooms, HttpStatus.OK);
-    }
+    
 }

@@ -1,7 +1,8 @@
 package com.hms.hms.room;
 
-import org.springframework.stereotype.Service;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.AllArgsConstructor;
 public class RoomServiceImpl implements RoomService{
 
     private RoomRepository roomRepository;
+    private SearchRoomRepository searchRoomRepository;
 
     @Override
     public RoomDto createRoom(RoomDto roomDto) {
@@ -49,33 +51,8 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public Iterable<RoomDto> findRoomsByType(List<Integer> type) {
-        return roomRepository.findRoomsByType(type);
-    }
-
-    @Override
-    public Iterable<RoomDto> findAvailableRooms() {
-        return roomRepository.findAvailableRooms();
-    }
-
-    @Override
-    public Iterable<RoomDto> findRoomsByPriceLessThen(Double price) {
-        return roomRepository.findRoomsByPriceLessThen(price);
-    }
-
-    @Override
-    public Iterable<RoomDto> findRoomsByPriceGreaterThan(Double price) {
-        return roomRepository.findRoomsByPriceGreaterThan(price);
-    }
-
-    @Override
-    public Iterable<RoomDto> findRoomsByRatingLessThen(Double rating) {
-        return roomRepository.findRoomsByRatingLessThen(rating);
-    }
-
-    @Override
-    public Iterable<RoomDto> findRoomsByRatingGreaterThan(Double rating) {
-        return roomRepository.findRoomsByRatingGreaterThan(rating);
+    public Iterable<RoomDto> searchRooms(List<RoomType> types, Double price, Double rating) {
+        return RoomMapper.mapToRoomDtos(searchRoomRepository.findAllBySimpleQuery(types, price, rating));
     }
     
 }
