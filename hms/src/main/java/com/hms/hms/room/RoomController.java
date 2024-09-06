@@ -23,6 +23,7 @@ import lombok.AllArgsConstructor;
 public class RoomController {
     
     private RoomService roomService;
+    private SearchRoomRepository searchRoomRepository;
 
     @PostMapping
     public ResponseEntity<RoomDto> createRoom(@RequestBody RoomDto roomDto) {
@@ -55,26 +56,12 @@ public class RoomController {
     }
 
     @GetMapping("search")
-    public String searchRooms(
+    public List<Room> searchRooms(
         @RequestParam(required = false) List<RoomType> types,
-        @RequestParam(required = false) Double minPrice,
-        @RequestParam(required = false) Double minRating,
-        @RequestParam(required = false) Double maxPrice,
-        @RequestParam(required = false) Double maxRating
+        @RequestParam(required = false) Double price,
+        @RequestParam(required = false) Double rating
     ) {
-        String params= "";
-        if (types != null) {
-            params = params + "types=" + types.toString();
-        }
-
-        if (minPrice != null) {
-            params = params + ", minPrice=" + minPrice;
-        }
-
-        if (minRating != null) {
-            params = params + ", minRating=" + minRating;
-        }
-        return params;
+        return searchRoomRepository.findAllBySimpleQuery(types, price, rating);
     }
     
 }
