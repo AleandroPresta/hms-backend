@@ -14,6 +14,5 @@ public interface RoomService {
         Double price,
         Double rating
     );
-
     
 }
