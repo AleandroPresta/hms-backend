@@ -20,7 +20,7 @@ public class SearchRoomRepository {
 
     private final EntityManager em;
 
-    public List<Room> findAllBySimpleQuery(
+    public Iterable<Room> findAllBySimpleQuery(
         List<RoomType> types,
         Double price,
         Double rating

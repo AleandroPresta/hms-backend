@@ -56,12 +56,13 @@ public class RoomController {
     }
 
     @GetMapping("search")
-    public List<Room> searchRooms(
+    public ResponseEntity<Iterable<RoomDto>> searchRooms(
         @RequestParam(required = false) List<RoomType> types,
         @RequestParam(required = false) Double price,
         @RequestParam(required = false) Double rating
     ) {
-        return searchRoomRepository.findAllBySimpleQuery(types, price, rating);
+        Iterable<RoomDto> searchedRooms = roomService.searchRooms(types, price, rating);
+        return new ResponseEntity<>(searchedRooms, HttpStatus.OK);
     }
     
 }
