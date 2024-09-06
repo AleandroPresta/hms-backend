@@ -1,12 +1,8 @@
 package com.hms.hms.room;
 
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
-
-import static com.hms.hms.room.CustomSpecs.typeIn;
-import static com.hms.hms.room.CustomSpecs.priceLessThan;
 
 @Service
 @AllArgsConstructor
@@ -50,45 +46,5 @@ public class RoomServiceImpl implements RoomService{
         roomRepository.delete(room);
         return RoomMapper.mapToRoomDto(room);
     }
-
-    @Override
-    public Iterable<RoomDto> findRoomsByType(List<RoomType> types) {
-        return roomRepository.findAll(typeIn(types));
-    }
-
-    @Override
-    public Iterable<RoomDto> findRoomsByTypeAndPrice(RoomType type, Double price) {
-        return RoomMapper.mapToRoomDtos(roomRepository.findRoomsByTypeAndPrice(type, price)); 
-    }
-
-    @Override
-    public Iterable<RoomDto> findRoomsByTypeAndPriceLessThen(List<RoomType> type, Double price) {
-        return roomRepository.findAll(typeIn(type).and(priceLessThan(price)));
-    }
-
-    /* @Override
-    public Iterable<RoomDto> findAvailableRooms() {
-        return roomRepository.findAvailableRooms();
-    }
-
-    @Override
-    public Iterable<RoomDto> findRoomsByPriceLessThen(Double price) {
-        return roomRepository.findRoomsByPriceLessThen(price);
-    }
-
-    @Override
-    public Iterable<RoomDto> findRoomsByPriceGreaterThan(Double price) {
-        return roomRepository.findRoomsByPriceGreaterThan(price);
-    }
-
-    @Override
-    public Iterable<RoomDto> findRoomsByRatingLessThen(Double rating) {
-        return roomRepository.findRoomsByRatingLessThen(rating);
-    }
-
-    @Override
-    public Iterable<RoomDto> findRoomsByRatingGreaterThan(Double rating) {
-        return roomRepository.findRoomsByRatingGreaterThan(rating);
-    } */
     
 }
