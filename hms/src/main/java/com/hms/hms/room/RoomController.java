@@ -58,7 +58,9 @@ public class RoomController {
     public String searchRooms(
         @RequestParam(required = false) List<RoomType> types,
         @RequestParam(required = false) Double minPrice,
-        @RequestParam(required = false) Double minRating
+        @RequestParam(required = false) Double minRating,
+        @RequestParam(required = false) Double maxPrice,
+        @RequestParam(required = false) Double maxRating
     ) {
         String params= "";
         if (types != null) {
