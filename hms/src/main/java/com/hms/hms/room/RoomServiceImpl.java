@@ -53,12 +53,17 @@ public class RoomServiceImpl implements RoomService{
     @Override
     public Iterable<RoomDto> searchRooms(
         List<RoomType> types, 
-        Double minPrice, Double maxPrice, 
-        Double minRating, Double maxRating,
-        Boolean isAvailable) {
+        Double minPrice, 
+        Double maxPrice, 
+        Double minRating, 
+        Double maxRating,
+        Boolean isAvailable,
+        Integer pageNo,
+        Integer pageSize,
+        String sortBy) {
         return RoomMapper.mapToRoomDtos(
             searchRoomRepository
-            .findAllByQuery(types, minPrice, maxPrice, minRating, maxRating, isAvailable)
+            .findAllByQuery(types, minPrice, maxPrice, minRating, maxRating, isAvailable, pageNo, pageSize, sortBy)
             );
     }
     

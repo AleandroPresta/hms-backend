@@ -1,6 +1,7 @@
 package com.hms.hms.room;
 
 import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -61,9 +62,12 @@ public class RoomController {
         @RequestParam(required = false) Double maxPrice,
         @RequestParam(required = false) Double minRating,
         @RequestParam(required = false) Double maxRating,
-        @RequestParam(required = false) Boolean isAvailable
+        @RequestParam(required = false) Boolean isAvailable,
+        @RequestParam(required = false) Integer pageNo,
+        @RequestParam(required = false) Integer pageSize,
+        @RequestParam(required = false) String sortBy
     ) {
-        Iterable<RoomDto> searchedRooms = roomService.searchRooms(types, minPrice, maxPrice, minRating, maxRating, isAvailable);
+        Iterable<RoomDto> searchedRooms = roomService.searchRooms(types, minPrice, maxPrice, minRating, maxRating, isAvailable, pageNo, pageSize, sortBy);
         return new ResponseEntity<>(searchedRooms, HttpStatus.OK);
     }
     
