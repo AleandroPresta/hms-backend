@@ -15,7 +15,10 @@ public interface RoomService {
         Double maxPrice,
         Double minRating,
         Double maxRating,
-        Boolean isAvailable
+        Boolean isAvailable,
+        Integer pageNo,
+        Integer pageSize,
+        String sortBy
     );
     
 }

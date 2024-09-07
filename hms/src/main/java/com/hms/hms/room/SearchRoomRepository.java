@@ -1,5 +1,6 @@
 package com.hms.hms.room;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
@@ -26,7 +27,10 @@ public class SearchRoomRepository {
         Double maxPrice,
         Double minRating,
         Double maxRating,
-        Boolean isAvailable
+        Boolean isAvailable,
+        Integer pageNo,
+        Integer pageSize,
+        String sortBy
     ) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Room> cq = cb.createQuery(Room.class);
@@ -60,7 +64,18 @@ public class SearchRoomRepository {
             predicates.add(cb.equal(root.get("isAvailable"), isAvailable));
         }
 
-        // Add all predicates to the query
+        // Add paging and sorting
+        if (sortBy != null) {
+            cq.orderBy(cb.asc(root.get(sortBy)));
+        }
+
+        // Apply paging if pageNo and pageSize are provided
+        if (pageNo != null && pageSize != null) {
+            int offset = (pageNo - 1) * pageSize;
+            return em.createQuery(cq).setFirstResult(offset).setMaxResults(pageSize).getResultList();
+        }
+
+        // Return the result without paging
         cq.where(predicates.toArray(new Predicate[0]));
         return em.createQuery(cq).getResultList();
 
