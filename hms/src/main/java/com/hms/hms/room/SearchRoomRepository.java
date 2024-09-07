@@ -20,10 +20,12 @@ public class SearchRoomRepository {
 
     private final EntityManager em;
 
-    public Iterable<Room> findAllBySimpleQuery(
+    public Iterable<Room> findAllByQuery(
         List<RoomType> types,
-        Double price,
-        Double rating
+        Double minPrice,
+        Double maxPrice,
+        Double minRating,
+        Double maxRating
     ) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Room> cq = cb.createQuery(Room.class);
@@ -37,12 +39,20 @@ public class SearchRoomRepository {
             predicates.add(root.get("type").in(types));
         }
 
-        if (price != null) {
-            predicates.add(cb.equal(root.get("price"), price));
+        if (minPrice != null) {
+            predicates.add(cb.greaterThanOrEqualTo(root.get("price"), minPrice));
         }
 
-        if (rating != null) {
-            predicates.add(cb.equal(root.get("rating"), rating));
+        if (maxPrice != null) {
+            predicates.add(cb.lessThanOrEqualTo(root.get("price"), maxPrice));
+        }
+
+        if (minRating != null) {
+            predicates.add(cb.greaterThanOrEqualTo(root.get("rating"), minRating));
+        }
+
+        if (maxRating != null) {
+            predicates.add(cb.lessThanOrEqualTo(root.get("rating"), maxRating));
         }
 
         // Add all predicates to the query

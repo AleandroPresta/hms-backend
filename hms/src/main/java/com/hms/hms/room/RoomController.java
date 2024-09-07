@@ -58,10 +58,12 @@ public class RoomController {
     @GetMapping("search")
     public ResponseEntity<Iterable<RoomDto>> searchRooms(
         @RequestParam(required = false) List<RoomType> types,
-        @RequestParam(required = false) Double price,
-        @RequestParam(required = false) Double rating
+        @RequestParam(required = false) Double minPrice,
+        @RequestParam(required = false) Double maxPrice,
+        @RequestParam(required = false) Double minRating,
+        @RequestParam(required = false) Double maxRating
     ) {
-        Iterable<RoomDto> searchedRooms = roomService.searchRooms(types, price, rating);
+        Iterable<RoomDto> searchedRooms = roomService.searchRooms(types, minPrice, maxPrice, minRating, maxRating);
         return new ResponseEntity<>(searchedRooms, HttpStatus.OK);
     }
     

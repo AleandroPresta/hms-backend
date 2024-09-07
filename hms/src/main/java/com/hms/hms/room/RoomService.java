@@ -11,8 +11,10 @@ public interface RoomService {
     RoomDto deleteRoomById(Long id);
     Iterable<RoomDto> searchRooms(
         List<RoomType> types,
-        Double price,
-        Double rating
+        Double minPrice,
+        Double maxPrice,
+        Double minRating,
+        Double maxRating
     );
     
 }

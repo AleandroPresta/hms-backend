@@ -51,8 +51,14 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public Iterable<RoomDto> searchRooms(List<RoomType> types, Double price, Double rating) {
-        return RoomMapper.mapToRoomDtos(searchRoomRepository.findAllBySimpleQuery(types, price, rating));
+    public Iterable<RoomDto> searchRooms(
+        List<RoomType> types, 
+        Double minPrice, Double maxPrice, 
+        Double minRating, Double maxRating) {
+        return RoomMapper.mapToRoomDtos(
+            searchRoomRepository
+            .findAllByQuery(types, minPrice, maxPrice, minRating, maxRating)
+            );
     }
     
 }
