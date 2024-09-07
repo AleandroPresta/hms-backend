@@ -2,7 +2,6 @@ package com.hms.hms.room;
 
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;

@@ -1,6 +1,5 @@
 package com.hms.hms.room;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
