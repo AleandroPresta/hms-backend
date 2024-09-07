@@ -3,7 +3,6 @@ package com.hms.hms.room;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
@@ -13,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 
 import java.util.List;
+import java.util.ArrayList;
 
 @Repository
 @RequiredArgsConstructor
@@ -26,22 +26,29 @@ public class SearchRoomRepository {
         Double rating
     ) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-
         CriteriaQuery<Room> cq = cb.createQuery(Room.class);
-
         Root<Room> root = cq.from(Room.class);
 
-        Predicate p1 = cb.in(root.get("type")).value(types);
-        Predicate p2 = cb.equal(root.get("price"), price);
-        Predicate p3 = cb.equal(root.get("rating"), rating);
+        // Define an empty list of predicates
+        List<Predicate> predicates = new ArrayList<>();
 
-        cq.where(
-            cb.or(p1, p2, p3)
-        );
+        // Add dynamic predicates based on the input parameters
+        if (types != null) {
+            predicates.add(root.get("type").in(types));
+        }
 
-        TypedQuery<Room> query = em.createQuery(cq);
+        if (price != null) {
+            predicates.add(cb.equal(root.get("price"), price));
+        }
 
-        return query.getResultList();
+        if (rating != null) {
+            predicates.add(cb.equal(root.get("rating"), rating));
+        }
+
+        // Add all predicates to the query
+        cq.where(predicates.toArray(new Predicate[0]));
+        return em.createQuery(cq).getResultList();
+
     }
     
 }
