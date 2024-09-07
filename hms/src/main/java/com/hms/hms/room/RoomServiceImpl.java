@@ -2,6 +2,9 @@ package com.hms.hms.room;
 
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -21,8 +24,21 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public Iterable<RoomDto> getAllRooms() {
-        return RoomMapper.mapToRoomDtos(roomRepository.findAll());
+    public Iterable<RoomDto> getAllRooms(
+        Integer pageNo,
+        Integer pageSize,
+        String sortBy
+    ) {
+        // Paging and sorting
+        // Edge cases
+        sortBy = sortBy == null ? "id" : sortBy;
+        pageNo = pageNo == null ? 0 : pageNo;
+        pageSize = pageSize == null ? 10 : pageSize;
+
+        Sort sort = Sort.by(sortBy);
+        Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+
+        return RoomMapper.mapToRoomDtos(roomRepository.findAll(pageable));
     }
 
     @Override
