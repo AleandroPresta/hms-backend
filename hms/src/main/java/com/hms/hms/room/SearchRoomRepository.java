@@ -25,7 +25,8 @@ public class SearchRoomRepository {
         Double minPrice,
         Double maxPrice,
         Double minRating,
-        Double maxRating
+        Double maxRating,
+        Boolean isAvailable
     ) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Room> cq = cb.createQuery(Room.class);
@@ -53,6 +54,10 @@ public class SearchRoomRepository {
 
         if (maxRating != null) {
             predicates.add(cb.lessThanOrEqualTo(root.get("rating"), maxRating));
+        }
+
+        if (isAvailable != null) {
+            predicates.add(cb.equal(root.get("available"), isAvailable));
         }
 
         // Add all predicates to the query

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ser.std.StdArraySerializers.BooleanArraySerializer;
+
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -61,9 +63,10 @@ public class RoomController {
         @RequestParam(required = false) Double minPrice,
         @RequestParam(required = false) Double maxPrice,
         @RequestParam(required = false) Double minRating,
-        @RequestParam(required = false) Double maxRating
+        @RequestParam(required = false) Double maxRating,
+        @RequestParam(required = false) Boolean isAvailable
     ) {
-        Iterable<RoomDto> searchedRooms = roomService.searchRooms(types, minPrice, maxPrice, minRating, maxRating);
+        Iterable<RoomDto> searchedRooms = roomService.searchRooms(types, minPrice, maxPrice, minRating, maxRating, isAvailable);
         return new ResponseEntity<>(searchedRooms, HttpStatus.OK);
     }
     

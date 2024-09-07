@@ -14,7 +14,8 @@ public interface RoomService {
         Double minPrice,
         Double maxPrice,
         Double minRating,
-        Double maxRating
+        Double maxRating,
+        Boolean isAvailable
     );
     
 }
