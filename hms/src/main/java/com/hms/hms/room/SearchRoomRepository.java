@@ -57,7 +57,7 @@ public class SearchRoomRepository {
         }
 
         if (isAvailable != null) {
-            predicates.add(cb.equal(root.get("available"), isAvailable));
+            predicates.add(cb.equal(root.get("isAvailable"), isAvailable));
         }
 
         // Add all predicates to the query

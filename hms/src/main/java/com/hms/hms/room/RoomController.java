@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ser.std.StdArraySerializers.BooleanArraySerializer;
-
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -25,7 +23,6 @@ import lombok.AllArgsConstructor;
 public class RoomController {
     
     private RoomService roomService;
-    private SearchRoomRepository searchRoomRepository;
 
     @PostMapping
     public ResponseEntity<RoomDto> createRoom(@RequestBody RoomDto roomDto) {
