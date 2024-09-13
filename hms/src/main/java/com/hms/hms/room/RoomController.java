@@ -38,20 +38,6 @@ public class RoomController {
         return new ResponseEntity<>(room, HttpStatus.OK);
     }
 
-    @GetMapping("all")
-    public ResponseEntity<Iterable<RoomDto>> getAllRooms(
-        @RequestParam(required = false) @Min(0) Integer pageNo,
-        @RequestParam(required = false) @Min(0) Integer pageSize,
-        @RequestParam(required = false) String sortBy
-    ) {
-        Iterable<RoomDto> rooms = roomService.getAllRooms(
-            pageNo,
-            pageSize,
-            sortBy
-        );
-        return new ResponseEntity<>(rooms, HttpStatus.OK);
-    }
-
     @PutMapping("{id}/update")
     public ResponseEntity<RoomDto> updateRoom(@PathVariable Long id, @RequestBody RoomDto roomDto) {
         RoomDto updatedRoom = roomService.updateRoom(id, roomDto);
@@ -76,6 +62,7 @@ public class RoomController {
         @RequestParam(required = false) @Min(0) Integer pageSize,
         @RequestParam(required = false) String sortBy
     ) {
+        // Return the rooms and the number of pages depending on pageSize and total number of rooms
         Iterable<RoomDto> searchedRooms = roomService.searchRooms(types, minPrice, maxPrice, minRating, maxRating, isAvailable, pageNo, pageSize, sortBy);
         return new ResponseEntity<>(searchedRooms, HttpStatus.OK);
     }
