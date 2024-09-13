@@ -66,5 +66,34 @@ public class RoomController {
         Iterable<RoomDto> searchedRooms = roomService.searchRooms(types, minPrice, maxPrice, minRating, maxRating, isAvailable, pageNo, pageSize, sortBy);
         return new ResponseEntity<>(searchedRooms, HttpStatus.OK);
     }
+
+    @GetMapping("count")
+    public ResponseEntity<Integer> countRooms(
+        @RequestParam(required = false) List<RoomType> types,
+        @RequestParam(required = false) @Min(0) Double minPrice,
+        @RequestParam(required = false) @Min(0) Double maxPrice,
+        @RequestParam(required = false) @Min(0) Double minRating,
+        @RequestParam(required = false) @Min(0) Double maxRating,
+        @RequestParam(required = false) Boolean isAvailable
+    ) {
+        Integer count = roomService.countRooms(types, minPrice, maxPrice, minRating, maxRating, isAvailable);
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
+    @GetMapping("countPages")
+    public ResponseEntity<Integer> countRoomPages(
+        @RequestParam(required = false) List<RoomType> types,
+        @RequestParam(required = false) @Min(0) Double minPrice,
+        @RequestParam(required = false) @Min(0) Double maxPrice,
+        @RequestParam(required = false) @Min(0) Double minRating,
+        @RequestParam(required = false) @Min(0) Double maxRating,
+        @RequestParam(required = false) Boolean isAvailable,
+        @RequestParam(required = false) @Min(0) Integer pageSize
+    ) {
+        Integer count = roomService.countRooms(types, minPrice, maxPrice, minRating, maxRating, isAvailable);
+        // Calculate the number of pages based on the total number of rooms and the page size
+        Integer pageCount = (int) Math.ceil((double) count / pageSize);
+        return new ResponseEntity<>(pageCount, HttpStatus.OK);
+    }
     
 }

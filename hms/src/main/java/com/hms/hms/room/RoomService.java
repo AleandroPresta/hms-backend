@@ -19,5 +19,14 @@ public interface RoomService {
         Integer pageSize,
         String sortBy
     );
+
+    Integer countRooms(
+        List<RoomType> types,
+        Double minPrice,
+        Double maxPrice,
+        Double minRating,
+        Double maxRating,
+        Boolean isAvailable
+    );
     
 }

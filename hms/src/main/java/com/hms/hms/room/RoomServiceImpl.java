@@ -2,9 +2,6 @@ package com.hms.hms.room;
 
 import java.util.List;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -63,6 +60,17 @@ public class RoomServiceImpl implements RoomService{
             searchRoomRepository
             .findAllByQuery(types, minPrice, maxPrice, minRating, maxRating, isAvailable, pageNo, pageSize, sortBy)
             );
+    }
+
+    @Override
+    public Integer countRooms(
+        List<RoomType> types, 
+        Double minPrice, 
+        Double maxPrice, 
+        Double minRating, 
+        Double maxRating,
+        Boolean isAvailable) {
+        return searchRoomRepository.countAllByQuery(types, minPrice, maxPrice, minRating, maxRating, isAvailable);
     }
     
 }

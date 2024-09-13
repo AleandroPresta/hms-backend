@@ -20,6 +20,51 @@ public class SearchRoomRepository {
 
     private final EntityManager em;
 
+    public Integer countAllByQuery(
+        List<RoomType> types,
+        Double minPrice,
+        Double maxPrice,
+        Double minRating,
+        Double maxRating,
+        Boolean isAvailable
+    ) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<Room> root = cq.from(Room.class);
+
+        // Define an empty list of predicates
+        List<Predicate> predicates = new ArrayList<>();
+
+        // Add dynamic predicates based on the input parameters
+        if (types != null) {
+            predicates.add(root.get("type").in(types));
+        }
+
+        if (minPrice != null) {
+            predicates.add(cb.greaterThanOrEqualTo(root.get("price"), minPrice));
+        }
+
+        if (maxPrice != null) {
+            predicates.add(cb.lessThanOrEqualTo(root.get("price"), maxPrice));
+        }
+
+        if (minRating != null) {
+            predicates.add(cb.greaterThanOrEqualTo(root.get("rating"), minRating));
+        }
+
+        if (maxRating != null) {
+            predicates.add(cb.lessThanOrEqualTo(root.get("rating"), maxRating));
+        }
+
+        if (isAvailable != null) {
+            predicates.add(cb.equal(root.get("isAvailable"), isAvailable));
+        }
+
+        // Apply the predicates
+        cq.select(cb.count(root)).where(predicates.toArray(new Predicate[0]));
+        return Math.toIntExact(em.createQuery(cq).getSingleResult());
+    }
+
     public Iterable<Room> findAllByQuery(
         List<RoomType> types,
         Double minPrice,
