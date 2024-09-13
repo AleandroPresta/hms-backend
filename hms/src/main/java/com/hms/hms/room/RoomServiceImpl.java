@@ -2,6 +2,9 @@ package com.hms.hms.room;
 
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -18,11 +21,6 @@ public class RoomServiceImpl implements RoomService{
         Room room = RoomMapper.mapToRoom(roomDto);
         Room savedRoom = roomRepository.save(room);
         return RoomMapper.mapToRoomDto(savedRoom);
-    }
-
-    @Override
-    public Iterable<RoomDto> getAllRooms() {
-        return RoomMapper.mapToRoomDtos(roomRepository.findAll());
     }
 
     @Override
