@@ -113,6 +113,8 @@ public class SearchRoomRepository {
             cq.orderBy(cb.asc(root.get(sortBy)));
         }
 
+        cq.where(predicates.toArray(new Predicate[0]));
+
         // Apply paging if pageNo and pageSize are provided
         if (pageNo != null && pageSize != null) {
             int offset = (pageNo - 1) * pageSize;
@@ -120,7 +122,6 @@ public class SearchRoomRepository {
         }
 
         // Return the result without paging
-        cq.where(predicates.toArray(new Predicate[0]));
         return em.createQuery(cq).getResultList();
 
     }
