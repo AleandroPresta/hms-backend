@@ -92,6 +92,12 @@ All this filtering combined allows the user to access only the data that he need
 
 ### POST
 
+To POST a new room to the server all we need to do is a POST request on the `rooms` URL. The server will automatically assign an ID to the newly added room.
+
 ### PUT
 
+To modify a room we use a `PUT` request on the `rooms/{id}/update` URL.
+
 ### DELETE
+
+To delete a room we use a `DELETE` request on the `rooms/{id}/delete` URL.
